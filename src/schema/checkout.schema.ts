@@ -3,10 +3,17 @@ import { z } from 'zod';
 const cardNumberRegex =
   /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})$/;
 
-export const PersonalInfoSchema = z.object({
-  name: z.string({ required_error: 'Name is required' }).min(1),
-  email: z.string().email({ message: 'Please provide a valid email!' }),
-});
+export const PersonalInfoSchema = z
+  .object({
+    name: z.string({ required_error: 'Name is required' }).min(1),
+    email: z.string().email({ message: 'Please provide a valid email!' }),
+    password: z.string(),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
 export type PersonalInfo = z.infer<typeof PersonalInfoSchema>;
 
@@ -42,6 +49,6 @@ export const PaymentInfoSchema = z.object({
 export type PaymentInfo = z.infer<typeof PaymentInfoSchema>;
 
 export const CheckoutInfoSchema =
-  PersonalInfoSchema.merge(DeliveryInfoSchema).merge(PaymentInfoSchema);
+  DeliveryInfoSchema.merge(PersonalInfoSchema).merge(PaymentInfoSchema);
 
 export type CheckoutData = z.infer<typeof CheckoutInfoSchema>;
