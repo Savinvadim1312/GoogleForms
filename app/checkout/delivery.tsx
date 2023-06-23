@@ -24,9 +24,6 @@ export default function DeliveryDetails() {
     resolver: zodResolver(DeliveryInfoSchema),
     defaultValues: {
       shipping: 'free',
-      city: 'Santa Cruz',
-      postalCode: '123',
-      address: 'Str. A'
     },
   });
 
