@@ -1,34 +1,40 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from 'react-native';
+import { Link, Redirect } from 'expo-router';
 
 export default function Page() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
-  );
+  return <Redirect href={'/checkout'} />;
+
+  // return (
+  //   <View style={styles.container}>
+  //     <View style={styles.main}>
+  //       <Text style={styles.title}>Hello World</Text>
+
+  //       <Link href={'/checkout'} style={styles.subtitle}>
+  //         Checkout
+  //       </Link>
+  //     </View>
+  //   </View>
+  // );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 24,
   },
   main: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     maxWidth: 960,
-    marginHorizontal: "auto",
+    marginHorizontal: 'auto',
   },
   title: {
     fontSize: 64,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   subtitle: {
     fontSize: 36,
-    color: "#38434D",
+    color: '#38434D',
   },
 });
