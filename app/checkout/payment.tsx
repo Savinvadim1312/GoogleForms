@@ -1,14 +1,6 @@
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Alert, ScrollView, View } from 'react-native';
-import {
-  Button,
-  Card,
-  TextInput,
-  useTheme,
-  Switch,
-  Text,
-  Checkbox,
-} from 'react-native-paper';
+import { Button, Card, useTheme, Checkbox } from 'react-native-paper';
 
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,13 +16,12 @@ export default function PaymentDetails() {
     resolver: zodResolver(PaymentInfoSchema),
   });
 
-  const { setPayment, onSubmitAll } = useCheckoutContext();
+  const { onSubmitAll } = useCheckoutContext();
   const router = useRouter();
   const theme = useTheme();
 
   const nextPage = async (data: PaymentInfo) => {
     // Submit
-    // setPayment(data);
     const success = await onSubmitAll(data);
 
     if (success) {

@@ -1,10 +1,8 @@
-import { Link, useRouter } from 'expo-router';
-import { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { useRouter } from 'expo-router';
+import { View, ScrollView } from 'react-native';
 import {
   Button,
   Card,
-  TextInput,
   useTheme,
   RadioButton,
   HelperText,
