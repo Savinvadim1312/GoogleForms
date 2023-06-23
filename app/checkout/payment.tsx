@@ -1,5 +1,5 @@
 import { Link, useRouter } from 'expo-router';
-import { ScrollView, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 import {
   Button,
   Card,
@@ -17,20 +17,27 @@ import {
   PaymentInfoSchema,
 } from '../../src/schema/checkout.schema';
 import ControlledInput from '../../src/components/ControlledInput';
+import { useCheckoutContext } from '../../src/contexts/CheckoutContext';
 
 export default function PaymentDetails() {
   const { control, handleSubmit } = useForm<PaymentInfo>({
     resolver: zodResolver(PaymentInfoSchema),
   });
 
+  const { setPayment, onSubmitAll } = useCheckoutContext();
   const router = useRouter();
   const theme = useTheme();
 
-  const nextPage = () => {
+  const nextPage = async (data: PaymentInfo) => {
     // Submit
+    // setPayment(data);
+    const success = await onSubmitAll(data);
 
-    // TODO: Why it's not navigating home???
-    router.push('/');
+    if (success) {
+      router.push('/');
+    } else {
+      Alert.alert('Failed to submit the form');
+    }
   };
   return (
     <ScrollView

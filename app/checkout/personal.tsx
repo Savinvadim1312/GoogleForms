@@ -15,23 +15,20 @@ import {
 } from '../../src/schema/checkout.schema';
 
 import ControlledInput from '../../src/components/ControlledInput';
+import { useCheckoutContext } from '../../src/contexts/CheckoutContext';
 
 export default function PersonalDetails() {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<PersonalInfo>({
+  const { control, handleSubmit } = useForm<PersonalInfo>({
     resolver: zodResolver(PersonalInfoSchema),
   });
 
-  console.log(errors);
+  const { setPersonal } = useCheckoutContext();
 
   const router = useRouter();
   const theme = useTheme();
 
-  const nextPage = (data) => {
-    console.log('Form fields: ', data);
+  const nextPage = (data: PersonalInfo) => {
+    setPersonal(data);
 
     router.push('/checkout/delivery');
   };
