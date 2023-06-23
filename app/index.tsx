@@ -2,19 +2,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Link, Redirect } from 'expo-router';
 
 export default function Page() {
-  return <Redirect href={'/checkout'} />;
+  // return <Redirect href={'/checkout'} />;
 
-  // return (
-  //   <View style={styles.container}>
-  //     <View style={styles.main}>
-  //       <Text style={styles.title}>Hello World</Text>
+  return (
+    <View style={styles.container}>
+      <View style={styles.main}>
+        <Text style={styles.title}>Hello World</Text>
 
-  //       <Link href={'/checkout'} style={styles.subtitle}>
-  //         Checkout
-  //       </Link>
-  //     </View>
-  //   </View>
-  // );
+        <Link href={'/checkout'} style={styles.subtitle}>
+          Checkout
+        </Link>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
